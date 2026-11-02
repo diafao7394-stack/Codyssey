@@ -12,8 +12,8 @@
 -[O] 터미널 조작 로그 기록
 -[O] 권한 실습 및 증거 기록
 -[O] Docker 설치 및 기본 점검
--[] Docker 기본 운영 명령 수행
--[] 컨테이너 실행 실습
+-[O] Docker 기본 운영 명령 수행
+-[O] 컨테이너 실행 실습
 -[] 기존 Dockerfile 기반 커스텀 이미지 제작
 -[] 포트 매핑 및 접속 증거
 -[] Docker 볼륨 영속성 검증
@@ -285,3 +285,167 @@ PS C:\Users\difao> docker ps -a
 CONTAINER ID   IMAGE         COMMAND    CREATED       STATUS                   PORTS     NAMES
 9562d15c0d8e   hello-world   "/hello"   4 hours ago   Exited (0) 4 hours ago             vigorous_dewdney
  
+docker ps의 경우 현재 실행 중인 컨테이너 목록을 보여주는 명령이다. 여기서 -a를 붙이면 중지된 컨테이너까지 확인할 수 있다.
+
+PS C:\Users\difao> docker run -d --name ops-lab nginx:alpine
+Unable to find image 'nginx:alpine' locally
+alpine: Pulling from library/nginx
+b9b388a21ecf: Pull complete
+12b85cff06fd: Pull complete
+7cc330898115: Pull complete
+7b229517ed22: Pull complete
+2ec5fb117ffa: Pull complete
+657023555a2a: Pull complete
+26185d08a3ec: Pull complete
+9b0f7dfe35b2: Pull complete
+a4d5b1f57abc: Download complete
+acc2d54c3743: Download complete
+Digest: sha256:785835ea65db4bba6f021acc0f3be91b0fef76a53fe41f8588c6698d2aed0606
+Status: Downloaded newer image for nginx:alpine
+c3080411bec0e4dc8c3c01899cc8b044dcf2bc6d79edbc43668f4177a68431d4
+PS C:\Users\difao> docker logs ops-lab   (docker logs -f ops-lab 의 경우에는 기존 로그를 보여준 뒤, 새 로그가 발생할 때마다 계속 출력한다.)
+/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+/docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2026/11/01 23:03:44 [notice] 1#1: using the "epoll" event method
+2026/11/01 23:03:44 [notice] 1#1: nginx/1.31.8
+2026/11/01 23:03:44 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0)
+2026/11/01 23:03:44 [notice] 1#1: OS: Linux 6.18.54.1-microsoft-standard-WSL2
+2026/11/01 23:03:44 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/11/01 23:03:44 [notice] 1#1: start worker processes
+2026/11/01 23:03:44 [notice] 1#1: start worker process 31
+2026/11/01 23:03:44 [notice] 1#1: start worker process 32
+2026/11/01 23:03:44 [notice] 1#1: start worker process 33
+2026/11/01 23:03:44 [notice] 1#1: start worker process 34
+2026/11/01 23:03:44 [notice] 1#1: start worker process 35
+2026/11/01 23:03:44 [notice] 1#1: start worker process 36
+2026/11/01 23:03:44 [notice] 1#1: start worker process 37
+2026/11/01 23:03:44 [notice] 1#1: start worker process 38
+2026/11/01 23:03:44 [notice] 1#1: start worker process 39
+2026/11/01 23:03:44 [notice] 1#1: start worker process 40
+2026/11/01 23:03:44 [notice] 1#1: start worker process 41
+2026/11/01 23:03:44 [notice] 1#1: start worker process 42
+2026/11/01 23:03:44 [notice] 1#1: start worker process 43
+2026/11/01 23:03:44 [notice] 1#1: start worker process 44
+2026/11/01 23:03:44 [notice] 1#1: start worker process 45
+2026/11/01 23:03:44 [notice] 1#1: start worker process 46
+2026/11/01 23:03:44 [notice] 1#1: start worker process 47
+2026/11/01 23:03:44 [notice] 1#1: start worker process 48
+2026/11/01 23:03:44 [notice] 1#1: start worker process 49
+2026/11/01 23:03:44 [notice] 1#1: start worker process 50
+
+
+PS C:\Users\difao> docker stats
+CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O        BLOCK I/O     PIDS
+c3080411bec0   ops-lab   0.00%     17.05MiB / 7.539GiB   0.22%     1.7kB / 126B   0B / 12.3kB   21
+
+
+
+5. 컨테이너 실행 실습
+
+hello-world 실습
+
+PS C:\Users\difao> docker run hello-world
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+ubuntu 실습  (ls, echo, cat /etc/os-release)
+
+-it --interactive(컨테이너의 입력을 계속 열어둠.) + --tty(터미널처럼 사용할 수 있게 하다.)
+PS C:\Users\difao> docker run -it ubuntu bash
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+f3f25b84a7d7: Pull complete
+edafa32f5d9e: Pull complete
+21594acc2d8b: Download complete
+Digest: sha256:6a06111c3b0a8600feadb270aec771dc239bf407b25625f93f44ab00e11f4d3c
+Status: Downloaded newer image for ubuntu:latest
+root@69c1855c341f:/#
+root@69c1855c341f:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@69c1855c341f:/# echo "Hello from Ubuntu"
+Hello from Ubuntu
+root@69c1855c341f:/# cat /etc/os-release
+PRETTY_NAME="Ubuntu 26.04.1 LTS"
+NAME="Ubuntu"
+VERSION_ID="26.04"
+VERSION="26.04.1 LTS (Resolute Raccoon)"
+VERSION_CODENAME=resolute
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=resolute
+LOGO=ubuntu-logo
+
+
+
+PS C:\Users\difao> docker run -dit --name aelab ubuntu bash
+4c1173f98672ba6c9528975976f28794ca2108dc77f627c84edc00add7968e81
+PS C:\Users\difao>
+PS C:\Users\difao>
+PS C:\Users\difao> docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS         PORTS     NAMES
+4c1173f98672   ubuntu    "bash"    2 seconds ago   Up 2 seconds             aelab
+PS C:\Users\difao>
+PS C:\Users\difao>
+PS C:\Users\difao> docker attach aelab
+root@4c1173f98672:/#
+root@4c1173f98672:/#
+root@4c1173f98672:/# echo $$
+1
+root@4c1173f98672:/# read escape sequence
+PS C:\Users\difao> docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED              STATUS              PORTS     NAMES
+4c1173f98672   ubuntu    "bash"    About a minute ago   Up About a minute             aelab
+PS C:\Users\difao>
+PS C:\Users\difao>
+PS C:\Users\difao> docker exec -it aelab bash
+root@4c1173f98672:/#
+root@4c1173f98672:/#
+root@4c1173f98672:/# echo $$
+8
+root@4c1173f98672:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@4c1173f98672:/#
+root@4c1173f98672:/# exit
+exit
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug aelab
+    Learn more at https://docs.docker.com/go/debug-cli/
+PS C:\Users\difao>
+PS C:\Users\difao> docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS         PORTS     NAMES
+4c1173f98672   ubuntu    "bash"    2 minutes ago   Up 2 minutes             aelab
+PS C:\Users\difao> docker attach aelab
+root@4c1173f98672:/# echo $$
+1
+root@4c1173f98672:/# exit
+exit
+PS C:\Users\difao> docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+attach의 경우 실행한 프로세스를 종료할 때 컨테이너도 같이 종료된다. 그렇기에 사용을 종료하기 위해선 Ctrl+p, Ctrl+q를 활용하여 연결을 해제한다.
+exec의 경우 새로 생성된 셸만 종료하기 때문에 컨테이너는 종료되지 않는다.
