@@ -14,10 +14,10 @@
 -[O] Docker 설치 및 기본 점검
 -[O] Docker 기본 운영 명령 수행
 -[O] 컨테이너 실행 실습
--[] 기존 Dockerfile 기반 커스텀 이미지 제작
+-[O] 기존 Dockerfile 기반 커스텀 이미지 제작
 -[] 포트 매핑 및 접속 증거
 -[] Docker 볼륨 영속성 검증
--[] Git 설정 및 GitHub 연동
+-[O] Git 설정 및 GitHub 연동
 
 
 1. 터미널 조작 로그 기록
@@ -93,6 +93,8 @@ d-----      2026-10-30  오전 11:15                aa
 d-----      2026-10-30  오전 10:58                b
 -a----      2026-10-30  오전 11:05              8 c.txt
 -a----      2026-10-30  오전 10:58              0 ex1.tx
+현재 폴더 경로 삭제하기
+PS C:\Users\difao\.codyssey\docker-custom-lab> function prompt { "> " }
 
 권한 실습 및 증거 기록.
 권한을 확인/변경하는 명령을 수행하고 변경 전/후 비교를 기술 문서에 남긴다.
@@ -276,7 +278,7 @@ Server:
 PS C:\Users\difao> docker images    i Info →   U  In Use
 IMAGE                ID             DISK USAGE   CONTENT SIZE   EXTRA
 hello-world:latest   c567b231f656       25.9kB         9.49kB    U
-nginx:latest         600f7cd45e27        243MB         66.8MB
+nginx:latest         600f7cd45e27        243MB         66.8MBㅑ
   ::1/128
  Live Restore Enabled: false
  Firewall Backend: iptables
@@ -287,7 +289,7 @@ CONTAINER ID   IMAGE         COMMAND    CREATED       STATUS                   P
  
 docker ps의 경우 현재 실행 중인 컨테이너 목록을 보여주는 명령이다. 여기서 -a를 붙이면 중지된 컨테이너까지 확인할 수 있다.
 
-PS C:\Users\difao> docker run -d --name ops-lab nginx:alpine
+PS C:\Users\difao> docker run -dit --name ops-lab nginx:alpine
 Unable to find image 'nginx:alpine' locally
 alpine: Pulling from library/nginx
 b9b388a21ecf: Pull complete
@@ -454,3 +456,54 @@ exec의 경우 새로 생성된 셸만 종료하기 때문에 컨테이너는 �
 6. 기존 Dockerfile 기반 커스텀 이미지 제작.
 
 여기서 이미지란? -> 프로그램을 실행하는 데 필요한 파일, 라이브러리, 설정 등을 포함하는 실행용 묶음이다. 이미지를 사용하면 프로그램과 필요한 구성 요소를 함께 관리할 수 있어, 실행 환경을 준비하고 배포하기 편리하다.
+
+PS C:\Users\difao\.codyssey\docker-custom-lab> docker image ls my-web
+                                                                                                   i Info →   U  In Use
+IMAGE   ID             DISK USAGE   CONTENT SIZE   EXTRA
+PS C:\Users\difao\.codyssey\docker-custom-lab> docker build -t my-web:1.0 .
+[+] Building 13.1s (8/8) FINISHED                                                                  docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                               0.0s
+ => => transferring dockerfile: 111B                                                                               0.0s
+ => [internal] load metadata for docker.io/library/nginx:1.30.6-alpine                                             3.7s
+ => [auth] library/nginx:pull token for registry-1.docker.io                                                       0.0s
+ => [internal] load .dockerignore                                                                                  0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [internal] load build context                                                                                  0.0s
+ => => transferring context: 244B                                                                                  0.0s
+ => [1/2] FROM docker.io/library/nginx:1.30.6-alpine@sha256:0e52bd054126cdc040b1276c0af347aeb02a41b9cfe305d609476  8.3s
+ => => resolve docker.io/library/nginx:1.30.6-alpine@sha256:0e52bd054126cdc040b1276c0af347aeb02a41b9cfe305d609476  0.0s
+ => => extracting sha256:7b229517ed222597277036d94892173207d01a731ab3a88eeb1de2e963a2c788                          0.1s
+ => => sha256:5b8cb54cfa408030aaa43d7bffa9141e0ae6f8a479df13c7aa152100cca358fb 20.31MB / 20.31MB                   7.8s
+ => => sha256:bb658a2541968d2b90a8ee165ad08b7f71055c7f7832bdff98e2de2d8b90cf14 1.40kB / 1.40kB                     0.7s
+ => => sha256:81b64ae234ef95f3cfc19b7f6c45a511eccbefa6148889ee33ed43c6c3f39939 1.21kB / 1.21kB                     0.8s
+ => => sha256:e125989d16f03d1e00b60afdd9abe46ed1437ed63b73926d036a5537f6be770a 403B / 403B                         0.8s
+ => => sha256:885725a63a7cf1d4d5aac105944b35ece2b69a8c2cc6f7040f04727b7b8a63d2 964B / 964B                         0.3s
+ => => sha256:f19a2d3b695178ba0e57d473535f74f5d934f45e191de8334e730f83d2c62704 627B / 627B                         0.4s
+ => => sha256:9f0afb44f10e826253b342c0265e188067c2f0a30c782a52e329928a763adc60 1.88MB / 1.88MB                     1.3s
+ => => extracting sha256:9f0afb44f10e826253b342c0265e188067c2f0a30c782a52e329928a763adc60                          0.1s
+ => => extracting sha256:f19a2d3b695178ba0e57d473535f74f5d934f45e191de8334e730f83d2c62704                          0.0s
+ => => extracting sha256:885725a63a7cf1d4d5aac105944b35ece2b69a8c2cc6f7040f04727b7b8a63d2                          0.0s
+ => => extracting sha256:e125989d16f03d1e00b60afdd9abe46ed1437ed63b73926d036a5537f6be770a                          0.0s
+ => => extracting sha256:81b64ae234ef95f3cfc19b7f6c45a511eccbefa6148889ee33ed43c6c3f39939                          0.0s
+ => => extracting sha256:bb658a2541968d2b90a8ee165ad08b7f71055c7f7832bdff98e2de2d8b90cf14                          0.0s
+ => => extracting sha256:5b8cb54cfa408030aaa43d7bffa9141e0ae6f8a479df13c7aa152100cca358fb                          0.4s
+ => [2/2] COPY index.html /usr/share/nginx/html/index.html                                                         0.1s
+ => exporting to image                                                                                             0.8s
+ => => exporting layers                                                                                            0.1s
+ => => exporting manifest sha256:b6185604fda7bd13b99884d62502017ce5e9b00a61774d297f594b366637f749                  0.0s
+ => => exporting config sha256:ccb2e1e59ef940e68a650949a86d489ba4a29b6df428b6d0a96bdd62c8d0d0c3                    0.0s
+ => => exporting attestation manifest sha256:a00dd29ecefa1b89cdbe366502c15244f255921f24a1c69da9b0cfc12f121c69      0.0s
+ => => exporting manifest list sha256:1840870e263fe0fd37da960f369db934e0911a18766a96f986c4848ddc85b45a             0.0s
+ => => naming to docker.io/library/my-web:1.0                                                                      0.0s
+ => => unpacking to docker.io/library/my-web:1.0                                                                   0.6s
+PS C:\Users\difao\.codyssey\docker-custom-lab> docker image ls my-web
+                                                                                                   i Info →   U  In Use
+IMAGE        ID             DISK USAGE   CONTENT SIZE   EXTRA
+my-web:1.0   1840870e263f       92.7MB         26.1MB
+PS C:\Users\difao\.codyssey\docker-custom-lab> docker run -d --name my-web-container -p 8080:80 my-web:1.0
+7673664c7739381e7706f718f88f525f9c7a5d2cb73e895cd6433b38973a5d6a
+PS C:\Users\difao\.codyssey\docker-custom-lab> docker ps --filter "name=my-web-container"
+CONTAINER ID   IMAGE        COMMAND                   CREATED          STATUS          PORTS                                     NAMES
+7673664c7739   my-web:1.0   "/docker-entrypoint.…"   37 seconds ago   Up 36 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-web-container
+
+docker inspect 컨테이너 이름 입력 my web 컨테이너에 대한 자세한 정보들이 출력된다. 포트정보 포함 내용 존재 해당정보 첨부
