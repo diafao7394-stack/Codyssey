@@ -20,11 +20,12 @@
 -[O] Git 설정 및 GitHub 연동
 
 
-1. 터미널 조작 로그 기록
+## 1. 터미널 조작 로그 기록
 
 (현재 위치 확인)
 PS C:\Users\difao\.codyssey> pwd
 Path
+
 ----
 C:\Users\difao\.codyssey
 
@@ -96,7 +97,7 @@ d-----      2026-10-30  오전 10:58                b
 현재 폴더 경로 삭제하기
 PS C:\Users\difao\.codyssey\docker-custom-lab> function prompt { "> " }
 
-권한 실습 및 증거 기록.
+## 2. 권한 실습 및 증거 기록.
 권한을 확인/변경하는 명령을 수행하고 변경 전/후 비교를 기술 문서에 남긴다.    
 최소 요구 : 파일 1개, 디렉토리 1개에 대해 권한 변경 실험을 수행한다.
 icacls는 파일이나 폴더의 접근 권한(ACL)을 확인하거나 변경하는 명령어이다.
@@ -162,7 +163,7 @@ Mode                 LastWriteTime         Length Name
 
 
 
-Docker 설치 및 기본 점검
+## 3. Docker 설치 및 기본 점검
 docker 버전 확인
 PS C:\Users\difao\.codyssey> docker --version
 Docker version 29.9.2, build a82e528
@@ -273,7 +274,7 @@ Server:
 
 
 
-4. Docker 기본 운영 명령 수행
+## 4. Docker 기본 운영 명령 수행
 
 PS C:\Users\difao> docker images    i Info →   U  In Use
 IMAGE                ID             DISK USAGE   CONTENT SIZE   EXTRA
@@ -349,7 +350,7 @@ c3080411bec0   ops-lab   0.00%     17.05MiB / 7.539GiB   0.22%     1.7kB / 126B 
 
 
 
-5. 컨테이너 실행 실습
+## 5. 컨테이너 실행 실습
 
 hello-world 실습
 
@@ -453,7 +454,7 @@ attach의 경우 실행한 프로세스를 종료할 때 컨테이너도 같이 
 exec의 경우 새로 생성된 셸만 종료하기 때문에 컨테이너는 종료되지 않는다.
 
 
-6. 기존 Dockerfile 기반 커스텀 이미지 제작.
+## 6. 기존 Dockerfile 기반 커스텀 이미지 제작.
 
 여기서 이미지란? -> 프로그램을 실행하는 데 필요한 파일, 라이브러리, 설정 등을 포함하는 실행용 묶음이다. 이미지를 사용하면 프로그램과 필요한 구성 요소를 함께 관리할 수 있어, 실행 환경을 준비하고 배포하기 편리하다.
 
@@ -508,14 +509,14 @@ CONTAINER ID   IMAGE        COMMAND                   CREATED          STATUS   
 
 docker inspect 컨테이너 이름 입력 my web 컨테이너에 대한 자세한 정보들이 출력된다. 포트정보 포함 내용 존재 해당정보 첨부
 
-7. Docker 포트 매핑 및 접속 증거.
+## 7. Docker 포트 매핑 및 접속 증거.
 
 포트 매핑이란 내 pc의 호스트의 포트와 컨테이너 내부의 포트와 연결하여 호스트를 통하여 컨테이너의 서비스에 접근할 수 있도록 하는 방식이다.
 해당 실습에서는 -p 8080:80 옵션을 사용하여 8080번 포트를 컨테이너의 80번 포트에 연결하였다. 이 설정을 통하여 브라우저에서 컨테이너 내부의 Nginx 웹 서비스에 접근할 수 있다.
 
 <img width="2318" height="528" alt="image" src="https://github.com/user-attachments/assets/0c40e393-ac14-4058-ac96-1423afeb252c" />
 
-8. Docker 볼륨 영속성 검증
+## 8. Docker 볼륨 영속성 검증
 
 Docker에서 볼륨이란 외부저장소와 비슷한 개념을 가지고 있다. 보통 컨테이너를 삭제하게 될 경우 해당 컨테이너에 속한 모든 파일들이 같이 사라지게 된다. 볼륨은 이와 같은 상황에서 대처를 하기 위해 존재한다. 데이터를 볼륨에 저장하게 될 시, 컨테이너를 삭제하여도 해당 데이터를 유지할 수 있다.
 
