@@ -15,8 +15,8 @@
 -[O] Docker 기본 운영 명령 수행
 -[O] 컨테이너 실행 실습
 -[O] 기존 Dockerfile 기반 커스텀 이미지 제작
--[] 포트 매핑 및 접속 증거
--[] Docker 볼륨 영속성 검증
+-[O] 포트 매핑 및 접속 증거
+-[O] Docker 볼륨 영속성 검증
 -[O] Git 설정 및 GitHub 연동
 
 
@@ -533,3 +533,9 @@ Docker에서 볼륨이란 외부저장소와 비슷한 개념을 가지고 있�
 
 
 <img width="2838" height="1596" alt="스크린샷 2026-11-05 115418" src="https://github.com/user-attachments/assets/4fc111f6-e572-40a8-92de-077126764cf1" />
+
+
+9. Git 설정 및 GitHub 연동
+
+https://github.com/diafao7394-stack/Codyssey/blob/main/git%EC%97%B0%EB%8F%99/git-config.txt
+해당 위치에 Github에 연동하여 터미널로 커밋한 자료를 확인할 수 잇다.
