@@ -97,7 +97,7 @@ d-----      2026-10-30  오전 10:58                b
 PS C:\Users\difao\.codyssey\docker-custom-lab> function prompt { "> " }
 
 권한 실습 및 증거 기록.
-권한을 확인/변경하는 명령을 수행하고 변경 전/후 비교를 기술 문서에 남긴다.
+권한을 확인/변경하는 명령을 수행하고 변경 전/후 비교를 기술 문서에 남긴다.    
 최소 요구 : 파일 1개, 디렉토리 1개에 대해 권한 변경 실험을 수행한다.
 icacls는 파일이나 폴더의 접근 권한(ACL)을 확인하거나 변경하는 명령어이다.
 icacls = Integrity Control Access Control List
@@ -507,3 +507,29 @@ CONTAINER ID   IMAGE        COMMAND                   CREATED          STATUS   
 7673664c7739   my-web:1.0   "/docker-entrypoint.…"   37 seconds ago   Up 36 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-web-container
 
 docker inspect 컨테이너 이름 입력 my web 컨테이너에 대한 자세한 정보들이 출력된다. 포트정보 포함 내용 존재 해당정보 첨부
+
+7. Docker 포트 매핑 및 접속 증거.
+
+포트 매핑이란 내 pc의 호스트의 포트와 컨테이너 내부의 포트와 연결하여 호스트를 통하여 컨테이너의 서비스에 접근할 수 있도록 하는 방식이다.
+해당 실습에서는 -p 8080:80 옵션을 사용하여 8080번 포트를 컨테이너의 80번 포트에 연결하였다. 이 설정을 통하여 브라우저에서 컨테이너 내부의 Nginx 웹 서비스에 접근할 수 있다.
+
+<img width="2318" height="528" alt="image" src="https://github.com/user-attachments/assets/0c40e393-ac14-4058-ac96-1423afeb252c" />
+
+8. Docker 볼륨 영속성 검증
+
+Docker에서 볼륨이란 외부저장소와 비슷한 개념을 가지고 있다. 보통 컨테이너를 삭제하게 될 경우 해당 컨테이너에 속한 모든 파일들이 같이 사라지게 된다. 볼륨은 이와 같은 상황에서 대처를 하기 위해 존재한다. 데이터를 볼륨에 저장하게 될 시, 컨테이너를 삭제하여도 해당 데이터를 유지할 수 있다.
+
+해당 실습에서는 아래와 같은 순서로 실습을 진행하였다.
+
+1. Docker 볼륨 생성 ==> my_web_data
+2. volume-before 컨테이너 생성, 컨테이너의 /data 경로에 my-web-data 연결.  
+3. docker inspect로 볼륨이 정상적으로 연결되었는지 확인했다.
+4. /data/proof.txt 파일을 만들고 volume-persistence-test-001이라는 내용을 저장했다.
+5. 파일을 읽어 저장한 내용이 출력되는지 확인했다.
+6. volume-before 컨테이너를 중지하고 삭제했다.
+7. 컨테이너는 삭제되었지만 my-web-data 볼륨은 남아 있는지 확인했다.
+8. 새로운 volume-after 컨테이너를 만들고, 같은 my-web-data 볼륨을 /data에 연결했다.
+9. 파일을 다시 생성하지 않고 읽었을 때 동일한 내용이 출력되는 것을 확인하여, 데이터 영속성을 검증했다.
+
+
+<img width="2838" height="1596" alt="스크린샷 2026-11-05 115418" src="https://github.com/user-attachments/assets/4fc111f6-e572-40a8-92de-077126764cf1" />
