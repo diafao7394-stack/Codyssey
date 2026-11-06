@@ -3,26 +3,34 @@
 1) 실행환경
 - OS: Windows 11 
 - Shell: PowerShell 
-- Docker: 29.9.2
+3- Docker: 29.9.2
 - Git: 2.45.2.windows.1
 
 
 2) 수행 체크리스트
 
 -[O] 터미널 조작 로그 기록
+
 -[O] 권한 실습 및 증거 기록
+
 -[O] Docker 설치 및 기본 점검
+
 -[O] Docker 기본 운영 명령 수행
+
 -[O] 컨테이너 실행 실습
+
 -[O] 기존 Dockerfile 기반 커스텀 이미지 제작
+
 -[O] 포트 매핑 및 접속 증거
+
 -[O] Docker 볼륨 영속성 검증
+
 -[O] Git 설정 및 GitHub 연동
 
 
 ## 1. 터미널 조작 로그 기록
 
-#### (현재 위치 확인)
+#    ### (현재 위치 확인)
 PS C:\Users\difao\.codyssey> pwd
 Path
 
