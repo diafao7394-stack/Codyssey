@@ -1,4 +1,3 @@
-# Codyssey
 
 1) 실행환경
 - OS: Windows 11 
@@ -28,89 +27,81 @@
 -[O] Git 설정 및 GitHub 연동
 
 
-## 1. 터미널 조작 로그 기록
+## 1. 터미널 조작 로그 기록 (윈도우즈 파워셸)
 
-#    ### (현재 위치 확인)
-PS C:\Users\difao\.codyssey> pwd
-Path
+#### 현재 위치 확인, 현재 위치 이동하기
 
-----
-C:\Users\difao\.codyssey
+pwd
+cd ~~
 
-#### 목록 확인(숨김 파일 포함)
-PS C:\Users\difao\.codyssey> ls -Force
-    디렉터리: C:\Users\difao\.codyssey
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----      2026-10-30  오전 10:58                a
-d-----      2026-10-30  오전 10:58                b
--a----      2026-10-30  오전 10:58              0 ex1.txt
+<img width="598" height="794" alt="image" src="https://github.com/user-attachments/assets/3ad33fb4-ff0c-4baa-b4a0-6cdc1ecf7658" />
 
-#### 현재 위치 이동하기 
-PS C:\Users\difao\.codyssey> cd a
-PS C:\Users\difao\.codyssey\a> cd ..
-PS C:\Users\difao\.codyssey>
+#### 빈 폴더 생성, 빈 파일 생성
 
-#### 빈 파일 생성
-PS C:\Users\difao\.codyssey> ni empty.txt -ItemType File
-    디렉터리: C:\Users\difao\.codyssey
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----      2026-10-30  오전 11:03              0 empty.txt
+ni test.txt
+mkdir 1주차
 
-#### 파일 복사
-PS C:\Users\difao\.codyssey> cp empty.txt c.txt
+<img width="1158" height="804" alt="image" src="https://github.com/user-attachments/assets/ad6b605c-f1b3-4891-b96e-30f228c6e95e" />
+<img width="1160" height="1232" alt="image" src="https://github.com/user-attachments/assets/df8d201b-2ca0-4036-9a18-d02ddf9edf76" />
 
-#### 파일 이동
-PS C:\Users\difao\.codyssey> mv empty.txt "C:\Users\difao\.codyssey\a"
-PS C:\Users\difao\.codyssey> cd a
-PS C:\Users\difao\.codyssey\a> ls
-    디렉터리: C:\Users\difao\.codyssey\a
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----      2026-10-30  오전 11:05              8 empty.txt
+#### 폴더 내 파일 목록 확인(숨김 파일 포함)
+
+ls -Force
+
+<img width="1160" height="364" alt="image" src="https://github.com/user-attachments/assets/eec333c0-1f4d-428d-a9ee-9e6ae55fbfc6" />
+
+#### 파일 복사,  파일 이동
+
+cp test.txt c.txt
+mv c.txt a
+
+<img width="1174" height="1046" alt="image" src="https://github.com/user-attachments/assets/87c667ba-8c37-422c-a652-49bca38da41f" />
 
 #### 파일 이름 변경
-PS C:\Users\difao\.codyssey\a> ren empty.txt d.txt
-PS C:\Users\difao\.codyssey\a> ls
-    디렉터리: C:\Users\difao\.codyssey\a
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----      2026-10-30  오전 11:05              8 d.txt
 
-#### 파일 삭제
-PS C:\Users\difao\.codyssey\a> rm d.txt
-PS C:\Users\difao\.codyssey\a> ls  (하나 있던 파일을 삭제하여서 ls를 입력했을 때 출력값이 없다.)
-PS C:\Users\difao\.codyssey\a>
+ren (현재 파일 이름) (바꿀 파일 이름)
+rm (삭제할 파일 이름)
 
-#### 파일 내용 확인
-PS C:\Users\difao\.codyssey> cat c.txt
-asdfasdf
+<img width="656" height="222" alt="image" src="https://github.com/user-attachments/assets/1ce5a352-18e5-4f0d-aa61-4f8a033106bc" />
 
-#### 빈 폴더 생성
-PS C:\Users\difao\.codyssey> mkdir aa
-    디렉터리: C:\Users\difao\.codyssey
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----      2026-10-30  오전 11:15                aa
-PS C:\Users\difao\.codyssey> ls
-    디렉터리: C:\Users\difao\.codyssey
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----      2026-10-30  오전 11:11                a
-d-----      2026-10-30  오전 11:15                aa
-d-----      2026-10-30  오전 10:58                b
--a----      2026-10-30  오전 11:05              8 c.txt
--a----      2026-10-30  오전 10:58              0 ex1.tx
+#### 파일 내 내용 변경, 파일 내용 확인
 
-#### 현재 폴더 경로 삭제하기
+echo "~~~~" > test.txt   덮어쓰기
+echo "~~~~" >> test.txt  붙여쓰기
+cat test.txt             텍스트 읽기
+
+<img width="878" height="472" alt="image" src="https://github.com/user-attachments/assets/4be3232f-de2c-4cf7-ae86-51f8fc6e3820" />
+
+
+#### 프롬프트 메시지 출력값 변경하기
+
 PS C:\Users\difao\.codyssey\docker-custom-lab> function prompt { "> " }
+
+<img width="994" height="236" alt="image" src="https://github.com/user-attachments/assets/9730162f-2f5a-4b44-9ab2-3bd217a89a57" />
+
 
 ## 2. 권한 실습 및 증거 기록.
 권한을 확인/변경하는 명령을 수행하고 변경 전/후 비교를 기술 문서에 남긴다.    
 최소 요구 : 파일 1개, 디렉토리 1개에 대해 권한 변경 실험을 수행한다.
 icacls는 파일이나 폴더의 접근 권한(ACL)을 확인하거나 변경하는 명령어이다.
-icacls = Integrity Control Access Control List
+icacls = Integrity Control Access Control List    
+
+
+<img width="1122" height="1012" alt="image" src="https://github.com/user-attachments/assets/2c6c2b07-d09a-4a25-9599-206d39d5d37b" />
+
+I => Inherited (상속됨)
+F => Full control(모든 권한)
+
+
+<img width="1026" height="428" alt="image" src="https://github.com/user-attachments/assets/9eeecbda-2ede-4c21-91b6-cc8beb526580" />
+
+/deny => 거부
+
+/deny "${me}:w" (사용자에 대한 쓰기 명령 거부)
+
+위에서 이미 $me 에 대한 값을 whoami 로 설정했었다.
+whoami 는 현재 명령을 실행하는 사용자의 게정에 대한 값을 알려준다.
+
 
 PS C:\Users\difao\.codyssey> $lab = ".\권한실습"
 PS C:\Users\difao\.codyssey> mkdir "$lab\폴더"
