@@ -1,5 +1,5 @@
-<img width="2768" height="240" alt="image" src="https://github.com/user-attachments/assets/b0869397-e7de-4f6d-8139-249d49c61d29" />
-# 프로젝트 개요
+
+# 프로젝트 개요  
 1) 실행환경
 - OS: Windows 11 
 - Shell: PowerShell 
