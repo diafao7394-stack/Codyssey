@@ -1,4 +1,4 @@
-
+<img width="2768" height="240" alt="image" src="https://github.com/user-attachments/assets/b0869397-e7de-4f6d-8139-249d49c61d29" />
 # 프로젝트 개요
 1) 실행환경
 - OS: Windows 11 
@@ -178,81 +178,29 @@ docker images로 이미지 목록을 확인하고, docker ps -a 로 종료된 �
 
 
 
-<img width="2870" height="470" alt="image" src="https://github.com/user-attachments/assets/18aa7e5a-6f8f-4cba-9a81-707c9e1aabad" />
+<img width="2870" height="470" alt="image" src="https://github.com/user-attachments/assets/18aa7e5a-6f8f-4cba-9a81-707c9e1aabad" />  
 
-PS C:\Users\difao> docker images    i Info →   U  In Use
-IMAGE                ID             DISK USAGE   CONTENT SIZE   EXTRA
-hello-world:latest   c567b231f656       25.9kB         9.49kB    U
-nginx:latest         600f7cd45e27        243MB         66.8MBㅑ
-  ::1/128
- Live Restore Enabled: false
- Firewall Backend: iptables
- 
-PS C:\Users\difao> docker ps -a
-CONTAINER ID   IMAGE         COMMAND    CREATED       STATUS                   PORTS     NAMES
-9562d15c0d8e   hello-world   "/hello"   4 hours ago   Exited (0) 4 hours ago             vigorous_dewdney
- 
-docker ps의 경우 현재 실행 중인 컨테이너 목록을 보여주는 명령이다. 여기서 -a를 붙이면 중지된 컨테이너까지 확인할 수 있다.
+docker run -dit --name ops-lab nginx:alpine
+-dit
+--detach 컨테이너를 백그라운드에서 실행하고 PowerShell 프롬프트로 돌아온다.
+--interactive 터미널이 연결되어 있지 않아도 컨테이너의 표준 입력을 열어둔다.
+--tty 컨테이너에 가상 터미널을 할당한다.
+  
+<img width="2080" height="1372" alt="image" src="https://github.com/user-attachments/assets/5d21dd4f-afa2-4663-9875-23f273b442b5" />  
 
-PS C:\Users\difao> docker run -dit --name ops-lab nginx:alpine
-Unable to find image 'nginx:alpine' locally
-alpine: Pulling from library/nginx
-b9b388a21ecf: Pull complete
-12b85cff06fd: Pull complete
-7cc330898115: Pull complete
-7b229517ed22: Pull complete
-2ec5fb117ffa: Pull complete
-657023555a2a: Pull complete
-26185d08a3ec: Pull complete
-9b0f7dfe35b2: Pull complete
-a4d5b1f57abc: Download complete
-acc2d54c3743: Download complete
-Digest: sha256:785835ea65db4bba6f021acc0f3be91b0fef76a53fe41f8588c6698d2aed0606
-Status: Downloaded newer image for nginx:alpine
-c3080411bec0e4dc8c3c01899cc8b044dcf2bc6d79edbc43668f4177a68431d4
-PS C:\Users\difao> docker logs ops-lab   (docker logs -f ops-lab 의 경우에는 기존 로그를 보여준 뒤, 새 로그가 발생할 때마다 계속 출력한다.)
-/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
-/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
-/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
-10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
-10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
-/docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
-/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
-/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
-/docker-entrypoint.sh: Configuration complete; ready for start up
-2026/11/01 23:03:44 [notice] 1#1: using the "epoll" event method
-2026/11/01 23:03:44 [notice] 1#1: nginx/1.31.8
-2026/11/01 23:03:44 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0)
-2026/11/01 23:03:44 [notice] 1#1: OS: Linux 6.18.54.1-microsoft-standard-WSL2
-2026/11/01 23:03:44 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
-2026/11/01 23:03:44 [notice] 1#1: start worker processes
-2026/11/01 23:03:44 [notice] 1#1: start worker process 31
-2026/11/01 23:03:44 [notice] 1#1: start worker process 32
-2026/11/01 23:03:44 [notice] 1#1: start worker process 33
-2026/11/01 23:03:44 [notice] 1#1: start worker process 34
-2026/11/01 23:03:44 [notice] 1#1: start worker process 35
-2026/11/01 23:03:44 [notice] 1#1: start worker process 36
-2026/11/01 23:03:44 [notice] 1#1: start worker process 37
-2026/11/01 23:03:44 [notice] 1#1: start worker process 38
-2026/11/01 23:03:44 [notice] 1#1: start worker process 39
-2026/11/01 23:03:44 [notice] 1#1: start worker process 40
-2026/11/01 23:03:44 [notice] 1#1: start worker process 41
-2026/11/01 23:03:44 [notice] 1#1: start worker process 42
-2026/11/01 23:03:44 [notice] 1#1: start worker process 43
-2026/11/01 23:03:44 [notice] 1#1: start worker process 44
-2026/11/01 23:03:44 [notice] 1#1: start worker process 45
-2026/11/01 23:03:44 [notice] 1#1: start worker process 46
-2026/11/01 23:03:44 [notice] 1#1: start worker process 47
-2026/11/01 23:03:44 [notice] 1#1: start worker process 48
-2026/11/01 23:03:44 [notice] 1#1: start worker process 49
-2026/11/01 23:03:44 [notice] 1#1: start worker process 50
+아래는 docker stats를 입력하였을 때 출력되는 화면이다. Ctrl+c를 눌러서 해당 화면에서 탈출할 수 있다.  
+
+<img width="2066" height="262" alt="image" src="https://github.com/user-attachments/assets/8cb58aaa-c4cd-42f1-bd60-011e4c9011ae" />
 
 
 PS C:\Users\difao> docker stats
 CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O        BLOCK I/O     PIDS
 c3080411bec0   ops-lab   0.00%     17.05MiB / 7.539GiB   0.22%     1.7kB / 126B   0B / 12.3kB   21
 
-
+<img width="2406" height="850" alt="image" src="https://github.com/user-attachments/assets/a6e4b5d6-a31d-4ff4-9135-657f7a8ad153" />  
+docker 에서 실행중인 컨테이너와 종료된 컨테이너들을 중단하고, 삭제하는 명령어들이다.
+docker stop XXXXX 를 입력하면 name 이 XXXXX에 해당하는 컨테이너를 중지시키고,
+docker rm XXXXX 를 입력하면 중지된 상태인, name 이 XXXXX인 컨테이너를 삭제한다.
 
 ## 5. 컨테이너 실행 실습
 
@@ -261,83 +209,28 @@ hello-world 실습
 <img width="1550" height="864" alt="image" src="https://github.com/user-attachments/assets/beaa2c25-fe6a-4dcc-ab00-0381c8825445" />
 
 
-ubuntu 실습  (ls, echo, cat /etc/os-release)
 
--it --interactive(컨테이너의 입력을 계속 열어둠.) + --tty(터미널처럼 사용할 수 있게 하다.)
-PS C:\Users\difao> docker run -it ubuntu bash
-Unable to find image 'ubuntu:latest' locally
-latest: Pulling from library/ubuntu
-f3f25b84a7d7: Pull complete
-edafa32f5d9e: Pull complete
-21594acc2d8b: Download complete
-Digest: sha256:6a06111c3b0a8600feadb270aec771dc239bf407b25625f93f44ab00e11f4d3c
-Status: Downloaded newer image for ubuntu:latest
-root@69c1855c341f:/#
-root@69c1855c341f:/# ls
-bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
-root@69c1855c341f:/# echo "Hello from Ubuntu"
-Hello from Ubuntu
-root@69c1855c341f:/# cat /etc/os-release
-PRETTY_NAME="Ubuntu 26.04.1 LTS"
-NAME="Ubuntu"
-VERSION_ID="26.04"
-VERSION="26.04.1 LTS (Resolute Raccoon)"
-VERSION_CODENAME=resolute
-ID=ubuntu
-ID_LIKE=debian
-HOME_URL="https://www.ubuntu.com/"
-SUPPORT_URL="https://help.ubuntu.com/"
-BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
-PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
-UBUNTU_CODENAME=resolute
-LOGO=ubuntu-logo
+ubuntu 실습  (ls, echo, cat /etc/os-release)  
 
+<img width="2038" height="1312" alt="image" src="https://github.com/user-attachments/assets/38e63e15-1995-4400-91ed-b3e9dbcc6e48" />  
 
+Ubuntu bash 종료 직전 Ctrl+c를 입력하였기 때문에 130이 출력되는 것을 확인할 수 있다.  
 
-PS C:\Users\difao> docker run -dit --name aelab ubuntu bash
-4c1173f98672ba6c9528975976f28794ca2108dc77f627c84edc00add7968e81
-PS C:\Users\difao>
-PS C:\Users\difao>
-PS C:\Users\difao> docker ps
-CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS         PORTS     NAMES
-4c1173f98672   ubuntu    "bash"    2 seconds ago   Up 2 seconds             aelab
-PS C:\Users\difao>
-PS C:\Users\difao>
-PS C:\Users\difao> docker attach aelab
-root@4c1173f98672:/#
-root@4c1173f98672:/#
-root@4c1173f98672:/# echo $$
-1
-root@4c1173f98672:/# read escape sequence
-PS C:\Users\difao> docker ps
-CONTAINER ID   IMAGE     COMMAND   CREATED              STATUS              PORTS     NAMES
-4c1173f98672   ubuntu    "bash"    About a minute ago   Up About a minute             aelab
-PS C:\Users\difao>
-PS C:\Users\difao>
-PS C:\Users\difao> docker exec -it aelab bash
-root@4c1173f98672:/#
-root@4c1173f98672:/#
-root@4c1173f98672:/# echo $$
-8
-root@4c1173f98672:/# ls
-bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
-root@4c1173f98672:/#
-root@4c1173f98672:/# exit
-exit
-What's next:
-    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug aelab
-    Learn more at https://docs.docker.com/go/debug-cli/
-PS C:\Users\difao>
-PS C:\Users\difao> docker ps
-CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS         PORTS     NAMES
-4c1173f98672   ubuntu    "bash"    2 minutes ago   Up 2 minutes             aelab
-PS C:\Users\difao> docker attach aelab
-root@4c1173f98672:/# echo $$
-1
-root@4c1173f98672:/# exit
-exit
-PS C:\Users\difao> docker ps
-CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+<img width="2212" height="690" alt="image" src="https://github.com/user-attachments/assets/7c533e06-a1bc-4013-adf8-d99e4d049a12" />  
+
+attach 방식으로 로그인 후 강제탈출 (Ctrl+p, Ctrl+q)
+탈출 이후 docker ps 로 실행 중인 컨테이너를 확인했을 때 --name aelab 으로 출력되는 ubuntu bash가 아직 존재함을 파악할 수 있음.
+echo $$ 값은 1로 출력.  
+
+<img width="2142" height="664" alt="image" src="https://github.com/user-attachments/assets/eaa2978b-e00a-4538-87dd-cc93f72fb6ed" />
+ubuntu bash를 exec 방식으로 접속.
+exit 방식을 사용하여 종료하였음에도 docker ps로 실행 중인 컨테이너를 확인했을 때 ubuntu bash가 아직 존재하는 걸 확인할 수 있음.
+echo $$ 값은 8로 출력.  
+
+<img width="2094" height="378" alt="image" src="https://github.com/user-attachments/assets/870b6332-c5be-4af4-a9d9-f99d83df1ab8" />  
+이번에도 echo $$ 값은 위 attach 방식으로 진행한 것과 같이 1로 출력.
+하지만 exec 방식과는 다르게 exit로 종료를 했을 때 차이점이 발생한다.
+docker ps를 입력해보면 exec 방식으로 접속을 하였을 땐 bash가 유지되었으나 attach 는 exit로 종료하였을 때 실행중인 컨테이너 목록에서 제외된 것을 확인할 수 있다.  
 
 attach의 경우 실행한 프로세스를 종료할 때 컨테이너도 같이 종료된다. 그렇기에 사용을 종료하기 위해선 Ctrl+p, Ctrl+q를 활용하여 연결을 해제한다.
 exec의 경우 새로 생성된 셸만 종료하기 때문에 컨테이너는 종료되지 않는다.
@@ -347,54 +240,24 @@ exec의 경우 새로 생성된 셸만 종료하기 때문에 컨테이너는 �
 
 여기서 이미지란? -> 프로그램을 실행하는 데 필요한 파일, 라이브러리, 설정 등을 포함하는 실행용 묶음이다. 이미지를 사용하면 프로그램과 필요한 구성 요소를 함께 관리할 수 있어, 실행 환경을 준비하고 배포하기 편리하다.
 
-PS C:\Users\difao\.codyssey\docker-custom-lab> docker image ls my-web
-                                                                                                   i Info →   U  In Use
-IMAGE   ID             DISK USAGE   CONTENT SIZE   EXTRA
-PS C:\Users\difao\.codyssey\docker-custom-lab> docker build -t my-web:1.0 .
-[+] Building 13.1s (8/8) FINISHED                                                                  docker:desktop-linux
- => [internal] load build definition from Dockerfile                                                               0.0s
- => => transferring dockerfile: 111B                                                                               0.0s
- => [internal] load metadata for docker.io/library/nginx:1.30.6-alpine                                             3.7s
- => [auth] library/nginx:pull token for registry-1.docker.io                                                       0.0s
- => [internal] load .dockerignore                                                                                  0.0s
- => => transferring context: 2B                                                                                    0.0s
- => [internal] load build context                                                                                  0.0s
- => => transferring context: 244B                                                                                  0.0s
- => [1/2] FROM docker.io/library/nginx:1.30.6-alpine@sha256:0e52bd054126cdc040b1276c0af347aeb02a41b9cfe305d609476  8.3s
- => => resolve docker.io/library/nginx:1.30.6-alpine@sha256:0e52bd054126cdc040b1276c0af347aeb02a41b9cfe305d609476  0.0s
- => => extracting sha256:7b229517ed222597277036d94892173207d01a731ab3a88eeb1de2e963a2c788                          0.1s
- => => sha256:5b8cb54cfa408030aaa43d7bffa9141e0ae6f8a479df13c7aa152100cca358fb 20.31MB / 20.31MB                   7.8s
- => => sha256:bb658a2541968d2b90a8ee165ad08b7f71055c7f7832bdff98e2de2d8b90cf14 1.40kB / 1.40kB                     0.7s
- => => sha256:81b64ae234ef95f3cfc19b7f6c45a511eccbefa6148889ee33ed43c6c3f39939 1.21kB / 1.21kB                     0.8s
- => => sha256:e125989d16f03d1e00b60afdd9abe46ed1437ed63b73926d036a5537f6be770a 403B / 403B                         0.8s
- => => sha256:885725a63a7cf1d4d5aac105944b35ece2b69a8c2cc6f7040f04727b7b8a63d2 964B / 964B                         0.3s
- => => sha256:f19a2d3b695178ba0e57d473535f74f5d934f45e191de8334e730f83d2c62704 627B / 627B                         0.4s
- => => sha256:9f0afb44f10e826253b342c0265e188067c2f0a30c782a52e329928a763adc60 1.88MB / 1.88MB                     1.3s
- => => extracting sha256:9f0afb44f10e826253b342c0265e188067c2f0a30c782a52e329928a763adc60                          0.1s
- => => extracting sha256:f19a2d3b695178ba0e57d473535f74f5d934f45e191de8334e730f83d2c62704                          0.0s
- => => extracting sha256:885725a63a7cf1d4d5aac105944b35ece2b69a8c2cc6f7040f04727b7b8a63d2                          0.0s
- => => extracting sha256:e125989d16f03d1e00b60afdd9abe46ed1437ed63b73926d036a5537f6be770a                          0.0s
- => => extracting sha256:81b64ae234ef95f3cfc19b7f6c45a511eccbefa6148889ee33ed43c6c3f39939                          0.0s
- => => extracting sha256:bb658a2541968d2b90a8ee165ad08b7f71055c7f7832bdff98e2de2d8b90cf14                          0.0s
- => => extracting sha256:5b8cb54cfa408030aaa43d7bffa9141e0ae6f8a479df13c7aa152100cca358fb                          0.4s
- => [2/2] COPY index.html /usr/share/nginx/html/index.html                                                         0.1s
- => exporting to image                                                                                             0.8s
- => => exporting layers                                                                                            0.1s
- => => exporting manifest sha256:b6185604fda7bd13b99884d62502017ce5e9b00a61774d297f594b366637f749                  0.0s
- => => exporting config sha256:ccb2e1e59ef940e68a650949a86d489ba4a29b6df428b6d0a96bdd62c8d0d0c3                    0.0s
- => => exporting attestation manifest sha256:a00dd29ecefa1b89cdbe366502c15244f255921f24a1c69da9b0cfc12f121c69      0.0s
- => => exporting manifest list sha256:1840870e263fe0fd37da960f369db934e0911a18766a96f986c4848ddc85b45a             0.0s
- => => naming to docker.io/library/my-web:1.0                                                                      0.0s
- => => unpacking to docker.io/library/my-web:1.0                                                                   0.6s
-PS C:\Users\difao\.codyssey\docker-custom-lab> docker image ls my-web
-                                                                                                   i Info →   U  In Use
-IMAGE        ID             DISK USAGE   CONTENT SIZE   EXTRA
-my-web:1.0   1840870e263f       92.7MB         26.1MB
-PS C:\Users\difao\.codyssey\docker-custom-lab> docker run -d --name my-web-container -p 8080:80 my-web:1.0
-7673664c7739381e7706f718f88f525f9c7a5d2cb73e895cd6433b38973a5d6a
-PS C:\Users\difao\.codyssey\docker-custom-lab> docker ps --filter "name=my-web-container"
-CONTAINER ID   IMAGE        COMMAND                   CREATED          STATUS          PORTS                                     NAMES
-7673664c7739   my-web:1.0   "/docker-entrypoint.…"   37 seconds ago   Up 36 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-web-container
+dockerfile이란? -> 이미지를 어떻게 만들지 적어둔 텍스트 파일이다. 보통 확장자 없이 dockerfile이며 docker build를 실행했을 때 docker가 해당 파일의 지시를 수행하여 docker image를 만든다.
+확장자가 없기에 visualstudioCode를 사용하여 dockerfile 파일을 만드는 것이 일반적이다.
+
+<img width="958" height="162" alt="image" src="https://github.com/user-attachments/assets/cb35c9f7-e6e3-4f70-bdd7-7bf5d0491815" />  
+dockerfile에 대한 정보이다.
+이는 index.html을 기본페이지로 제공하는 nginx 이미지를 만들 수 있다.
+FROM nginx:1.30.6-alpine 은 새 이미지의 출발점으로 지정하는 코드이다.
+Copy는 빌드에 사용하는 폴더의 index.html에 접근하여 이미지 내부의 usr/share/ngninx/html/index.html에 복사한다.
+해당 이미지로 컨테이너를 실행하면 nginx 가 복사된 페이지를 제공한다.
+
+<img width="2836" height="194" alt="image" src="https://github.com/user-attachments/assets/a6aa167d-432e-42c5-8a7e-51960f8fc391" />  
+
+<img width="2768" height="240" alt="image" src="https://github.com/user-attachments/assets/66f90c02-7f3f-47e6-9c6e-b443a9c5303e" />  
+
+<img width="1120" height="458" alt="image" src="https://github.com/user-attachments/assets/19ab0cf1-8e73-4e12-bae2-8502bfba00c6" />  
+
+dockerfile 기반으로 커스텀 이미지를 제작하여 포트매핑을 한 것을 확인할 수 있다.
+
 
 docker inspect 컨테이너 이름 입력 my web 컨테이너에 대한 자세한 정보들이 출력된다. 포트정보 포함 내용 존재 해당정보 첨부
 
