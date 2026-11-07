@@ -89,79 +89,51 @@ icacls = Integrity Control Access Control List
 
 <img width="1122" height="1012" alt="image" src="https://github.com/user-attachments/assets/2c6c2b07-d09a-4a25-9599-206d39d5d37b" />
 
-I => Inherited (상속됨)
+I => Inherited (상속됨)  
 F => Full control(모든 권한)
 
 
 <img width="1026" height="428" alt="image" src="https://github.com/user-attachments/assets/9eeecbda-2ede-4c21-91b6-cc8beb526580" />
 
-/deny => 거부
-
+/deny => 거부  
 /deny "${me}:w" (사용자에 대한 쓰기 명령 거부)
 
-위에서 이미 $me 에 대한 값을 whoami 로 설정했었다.
+위에서 이미 $me 에 대한 값을 whoami 로 설정했었다.  
 whoami 는 현재 명령을 실행하는 사용자의 게정에 대한 값을 알려준다.
 
+<img width="2308" height="336" alt="image" src="https://github.com/user-attachments/assets/ccdc1d63-1785-45ad-af3f-c96e3aababec" />
 
-PS C:\Users\difao\.codyssey> $lab = ".\권한실습"
-PS C:\Users\difao\.codyssey> mkdir "$lab\폴더"
-PS C:\Users\difao\.codyssey> Set-Content "$lab\파일.txt" "실습용 내용"
-PS C:\Users\difao\.codyssey> $me = whoami
-PS C:\Users\difao\.codyssey> icacls "$lab\파일.txt"
-PS C:\Users\difao\.codyssey> icacls "$lab\파일.txt" /deny "${me}:w"
-PS C:\Users\difao\.codyssey> icacls "$lab\파일.txt"
-.\권한실습\파일.txt BOOK-P2FAS03CTM\difao:(DENY)(W)
-              NT AUTHORITY\SYSTEM:(I)(F)
-              BUILTIN\Administrators:(I)(F)
-              BOOK-P2FAS03CTM\difao:(I)(F)
+해당 이미지에서 Get_Content를 하였더니 액세스가 거부되었다.  
+이는 읽기 권한도 거부당한 것으로 해석이 된다.
+/deny 로 읽기 권한과 쓰기 권한을 거부한다면, 남은 권한에도 필요한 공통 권한인 SYNCHRONIZE 까지 거부되기 때문이다.  
 
-PS C:\Users\difao\.codyssey> Get-Content "$lab\파일.txt"
-Get-Content : 'C:\Users\difao\.codyssey\권한실습\파일.txt' 경로에 대한 액세스가 거부되었습니다.
-위치 줄:1 문자:1
-+ Get-Content "$lab\파일.txt"
-+ ~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : PermissionDenied: (C:\Users\difao\.codyssey\권한실습\파일.txt:String) [Get-Content], Unau
-thori    zedAccessException
-    + FullyQualifiedErrorId : GetContentReaderUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetContentCommand
-PS C:\Users\difao\.codyssey> Add-Content "$lab\파일.txt" "쓰기 시험" -ErrorAction Continue
-Add-Content : 'C:\Users\difao\.codyssey\권한실습\파일.txt' 경로에 대한 액세스가 거부되었습니다.
-위치 줄:1 문자:1
-+ Add-Content "$lab\파일.txt" "쓰기 시험" -ErrorAction Continue
-+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : PermissionDenied: (C:\Users\difao\.codyssey\권한실습\파일.txt:String) [Add-Content], Unau
-thori    zedAccessException
-    + FullyQualifiedErrorId : GetContentWriterUnauthorizedAccessError,Microsoft.PowerShell.Commands.AddContentCommand
-PS C:\Users\difao\.codyssey> icacls "$lab\폴더"
-.\권한실습\폴더 NT AUTHORITY\SYSTEM:(I)(OI)(CI)(F)
-          BUILTIN\Administrators:(I)(OI)(CI)(F)
-          BOOK-P2FAS03CTM\difao:(I)(OI)(CI)(F)
-PS C:\Users\difao\.codyssey> icacls "$lab\폴더" /deny "${me}:(WD)"
-처리된 파일: .\권한실습\폴더
-PS C:\Users\difao\.codyssey> icacls "$lab\폴더"
-.\권한실습\폴더 BOOK-P2FAS03CTM\difao:(DENY)(WD)
-          NT AUTHORITY\SYSTEM:(I)(OI)(CI)(F)
-          BUILTIN\Administrators:(I)(OI)(CI)(F)
-          BOOK-P2FAS03CTM\difao:(I)(OI)(CI)(F)
-PS C:\Users\difao\.codyssey> ni "$lab\폴더\새파일.txt" -ItemType File -ErrorAction Continue
-ni : 'C:\Users\difao\.codyssey\권한실습\폴더\새파일.txt' 경로에 대한 액세스가 거부되었습니다.
-위치 줄:1 문자:1
-+ ni "$lab\폴더\새파일.txt" -ItemType File -ErrorAction Continue
-+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : PermissionDenied: (C:\Users\difao\.codyssey\권한실습\폴더\새파일.txt:String) [New-Item],
-Unauthor    izedAccessException
-    + FullyQualifiedErrorId : NewItemUnauthorizedAccessError,Microsoft.PowerShell.Commands.NewItemCommand
-PS C:\Users\difao\.codyssey> icacls "$lab\파일.txt" /remove:d $me
-처리된 파일: .\권한실습\파일.txt
-PS C:\Users\difao\.codyssey> icacls "$lab\폴더" /remove:d $me
-처리된 파일: .\권한실습\폴더
-PS C:\Users\difao\.codyssey> Add-Content "$lab\파일.txt" "복구 후 쓰기 시험"
-PS C:\Users\difao\.codyssey> ni "$lab\폴더\복구후.txt" -ItemType File
-디렉터리: C:\Users\difao\.codyssey\권한실습\폴더
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----      2026-10-30  오후 12:05              0 복구후.txt
+<img width="1062" height="566" alt="image" src="https://github.com/user-attachments/assets/dca90cf0-f934-40b7-a717-65c5e26c985f" />
+<img width="2300" height="330" alt="image" src="https://github.com/user-attachments/assets/afdf9aad-3f25-486c-b8ad-5ea857b022e4" />
+  
+"$lab\폴더" 에 me 에 대한 WD의 권한을 거절했다.  
+WD는 Write data, add file등에 대한 권한이기에 ni를 활용한 새로운 파일 생성에 요청이 거절당하는걸 확인할 수 있다.  
 
+<img width="1288" height="1162" alt="image" src="https://github.com/user-attachments/assets/f979ed2b-d573-4ced-bab0-0308b1268bc9" />  
 
+기존에 icacls로 쓰기 권한이 거절된 파일, 새로울 파일 생성이 거절된 폴더에 대한 권한을 삭제했다.
+그 후 파일.txt에 새로운 내용을 기재한 후 내용변경을 확인했다.
+폴더 안에 새로운 파일을 생성하여 폴더 안의 목록들을 확인하였다.  
+
+해당 실습은 파워셸에서 진행하였기에 icacls 명령어를 사용하였다.
+우분투 환경에서도 권한에 대한 실습을 진행할 수 있는데, chmod 라는 명령어를 사용할 수 있다.  
+
+chmod xxx test.txt
+권한명령어 -> rwx비트의 숫자 표기법 -> 적용할 파일  
+
+rwx비트의 숫자 표기법은 다음과 같다.
+r(Read) = 4
+w(Write) = 2
+x(Execute) = 1  
+
+비트의 배열은 다음과 같다.
+(소유자)(그룹)(그 외 사용자)
+700의 경우 소유자에게 Read(4)+Write(2)+Execute(1) 모든 권한을 가지고 있는 것을 확인할 수 있다.
+600의 경우 소유자에게 Read(4)+Write(2) 권한만 가지고 있는 것을 확인할 수 있다.
 
 ## 3. Docker 설치 및 기본 점검
 docker 버전 확인
